@@ -7,10 +7,8 @@ def token_required(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
         token = request.cookies.get('token')
-
         if not token:
             return {'error':'Token is missing'}, 401
-        
         try:
             payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
             print("payload: ",payload)

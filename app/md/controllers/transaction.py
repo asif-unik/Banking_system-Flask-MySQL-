@@ -1,18 +1,18 @@
-from app.models.transactions_model import Transaction
-from app.serde.transaction_schema import transaction_list_schema,transaction_schema
+from app.md.models.transactions_model import Transaction
+from app.md.serde.transaction_schema import transaction_list_schema,transaction_schema
 from app import db
 from flask import Blueprint,request,session,jsonify
-from app.controllers.token import token_required
+from app.auth.decorator import token_required
 from datetime import datetime
-from app.models.user_model import User
+from app.md.models.user_model import User
 import json
+from app.md import transaction_bp
 
 
-transaction_bp = Blueprint('transaction',__name__)
 
 @transaction_bp.route('/transaction',methods=['POST'])
 @token_required
-def post():
+def transaction():
     data = request.json
     debit = data.get('debit')
     credit = data.get('credit')

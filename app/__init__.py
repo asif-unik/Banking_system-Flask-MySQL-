@@ -20,16 +20,15 @@ def create_app():
     # jwt.init_app(app)
     
 
-    from app.controllers.signup import signup_bp
-    app.register_blueprint(signup_bp)
-    from app.controllers.login import login_bp
-    app.register_blueprint(login_bp)
-    from app.controllers.transactions import transaction_bp
-    app.register_blueprint(transaction_bp)
-    from app.controllers.logout import logout_bp
-    app.register_blueprint(logout_bp)
-    from app.controllers.banker import user_accounts_bp
-    app.register_blueprint(user_accounts_bp)
+    from app.auth import auth_bp
+    app.register_blueprint(auth_bp,url_prefix='/auth')
+
+    from app.md import transaction_bp
+    app.register_blueprint(transaction_bp,url_prefix='/transaction')
+    # from app.controllers.transactions import transaction_bp
+    # app.register_blueprint(transaction_bp)
+    # from app.controllers.banker import user_accounts_bp
+    # app.register_blueprint(user_accounts_bp)
 
     return app
 

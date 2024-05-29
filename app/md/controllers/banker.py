@@ -1,15 +1,15 @@
-from app.models.user_model import User
-from app.models.transactions_model import Transaction
-from app.serde.user_schema import userschema, user_list_schema
+from app.md.models.user_model import User
+from app.md.models.transactions_model import Transaction
+from app.md.serde.user_schema import userschema, user_list_schema
 from flask import jsonify,request,Blueprint,session
-from app.controllers.token import token_required
+from app.auth.decorator import token_required
+from app.md import transaction_bp
 
+# user_accounts_bp = Blueprint('user_accounts',__name__)
 
-user_accounts_bp = Blueprint('user_accounts',__name__)
-
-@user_accounts_bp.route('/user_accounts',methods=['GET'])
+@transaction_bp.route('/user_accounts',methods=['GET'])
 @token_required
-def get():
+def user_accounts():
     session_id = session.get('id')
     if not session_id:
         return jsonify({"Message":"Login Required..!"})

@@ -1,15 +1,15 @@
 from flask import request,Blueprint,jsonify,session,current_app,make_response
-from app.models.user_model import User
+from app.md.models.user_model import User
 from hashlib import sha256
 from datetime import datetime, timezone, timedelta
 import jwt
+from app.auth import auth_bp
 
 
 
-login_bp = Blueprint('login',__name__)
 
-@login_bp.route('/login',methods=['POST'])
-def post():
+@auth_bp.route('/login',methods=['POST'])
+def login():
     data = request.json
     id_in_session = session.get('id')
     if id_in_session:

@@ -9,4 +9,4 @@ class User(db.Model):
     balance = db.Column(db.Float,default=0)
     transactions = db.relationship('Transaction', backref='user', lazy=True)
 
-from app.models.transactions_model import Transaction
+from app.md.models.transactions_model import Transaction

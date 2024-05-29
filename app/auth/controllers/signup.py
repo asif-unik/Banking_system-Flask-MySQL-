@@ -1,14 +1,14 @@
 from flask import Blueprint, request, jsonify
 from marshmallow import ValidationError
 from hashlib import sha256
-from app.models.user_model import User
-from app.serde.user_schema import user_schema
+from app.md.models.user_model import User
+from app.md.serde.user_schema import user_schema
 from app import db
+from app.auth import auth_bp
 
 
-signup_bp = Blueprint('signups', __name__)
-@signup_bp.route('/signup', methods=['POST'])
-def post():
+@auth_bp.route('/signup', methods=['POST'])
+def signup():
     data = request.json
     if not data.get('name'):
         return jsonify({'message':'name cannot be empty'})
