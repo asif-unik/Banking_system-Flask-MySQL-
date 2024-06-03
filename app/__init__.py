@@ -1,10 +1,9 @@
 from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_jwt_extended import JWTManager
 import urllib.parse
+from datetime import timedelta 
 
 db = SQLAlchemy()
-# jwt = JWTManager()
 
 
 def create_app():
@@ -16,8 +15,9 @@ def create_app():
     database = 'Banking_system'
     app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+pymysql://{username}:{password}@{hostname}:3306/{database}"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(seconds=10)
     db.init_app(app)
-    # jwt.init_app(app)
+
     
 
     from app.auth import auth_bp
@@ -25,12 +25,9 @@ def create_app():
 
     from app.md import transaction_bp
     app.register_blueprint(transaction_bp,url_prefix='/transaction')
-    # from app.controllers.transactions import transaction_bp
-    # app.register_blueprint(transaction_bp)
-    # from app.controllers.banker import user_accounts_bp
-    # app.register_blueprint(user_accounts_bp)
+
+    from app.auth import index_bp
+    app.register_blueprint(index_bp)
 
     return app
 
-
-print("Hello World")

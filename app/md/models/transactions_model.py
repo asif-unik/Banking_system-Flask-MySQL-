@@ -8,4 +8,5 @@ class Transaction(db.Model):
     time = db.Column(db.Time,nullable=False)
     account_balance = db.Column(db.Float,default=0)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+    transaction_id = db.Column(db.Integer,nullable=False,unique=True)
     
