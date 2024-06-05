@@ -13,16 +13,22 @@
         <div class="sidebar">
             <h2><img src="{{ url_for('static', filename='images/unik.png') }}" alt="" width="150" height="50"></h2>
             <ul id="sidebar-nav">
-                <li><a href="{{ url_for('transaction.user_profile') }}">Profile</a></li>
-                <li><a href="{{ url_for('transaction.transaction') }}">Transactions</a></li>
-                <li><a href="{{ url_for('transaction.credit_funds') }}">Deposit</a></li>
-                <li><a href="{{ url_for('transaction.debit_funds') }}">Withdraw</a></li>
+                <li><a href="{{ url_for('admin.user_profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('admin.transaction') }}">Transactions</a></li>
+                <li><a href="{{ url_for('admin.credit_funds') }}">Deposit</a></li>
+                <li><a href="{{ url_for('admin.debit_funds') }}">Withdraw</a></li>
+                <li><a href="{{ url_for('admin.users_account') }}">Users List</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
             </ul>
         </div>
         <div class="main-content">
             <div class="topbar">
+                {% if admin.is_admin %}
+                    <h1>Admin Panel</h1>
+                    <h2>Welcome, {{ admin.name }}</h2>
+                {% else %}
                 <h2>Welcome, {{ user.name }}</h2>
+                {% endif %}
             </div>
             <div class="content">
                 {% block content %}{% endblock %}

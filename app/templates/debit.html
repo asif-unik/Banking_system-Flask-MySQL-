@@ -1,3 +1,6 @@
+{% if admin.is_admin %}
+{% extends "admin.html" %}
+{% else %}
 {% extends "base.html" %}
 
 {% block title %}Deposit{% endblock %}
@@ -26,6 +29,9 @@
             <label for="amount">Amount:</label>
             <input type="number" class="form-control" id="amount" name="amount" required>
         </div>
+        <br>
+        
         <button type="submit" class="btn btn-primary">Withdraw</button>
     </form>
 {% endblock %}
+{% endif %}

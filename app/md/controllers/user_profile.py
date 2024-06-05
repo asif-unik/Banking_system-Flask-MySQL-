@@ -23,4 +23,4 @@ def user_profile():
         flash("User not found.", 'danger')
         return redirect(url_for('auth.login'))
 
-    return render_template('user_profile.html', user=user)
+    return render_template('user_profile.html', user=user,admin=user)

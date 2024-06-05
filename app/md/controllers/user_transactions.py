@@ -7,9 +7,9 @@ from app.md.controllers.transaction_id import generate_transaction_id
 from datetime import datetime
 from app import db
 
-@transaction_bp.route('/user_transaction')
+@transaction_bp.route('/transaction')
 @token_required
-def user_transaction():
+def transaction():
     user_id = session.get('id')
     if not user_id:
         flash("Please log in to view your profile.", 'danger')
@@ -18,7 +18,7 @@ def user_transaction():
     user = User.query.get(user_id)
     transactions = Transaction.query.filter_by(user_id=user_id).all()
 
-    return render_template('user_transaction.html', user=user, transactions=transactions)
+    return render_template('user_transaction.html', user=user, transactions=transactions, admin=user)
 
 
 @transaction_bp.route('/credit', methods=['GET', 'POST'])
@@ -51,10 +51,10 @@ def credit_funds():
         )
         db.session.add(transaction)
         db.session.commit()
-        flash('Withdrawal successful!', 'success')
+        flash('Deposit successful!', 'success')
         return redirect(url_for('transaction.credit_funds'))
 
-    return render_template('credit.html', user=user)
+    return render_template('credit.html', user=user,admin=user)
 
 
 
@@ -92,8 +92,8 @@ def debit_funds():
         )
         db.session.add(transaction)
         db.session.commit()
-        flash('Deposit successful!', 'success')
+        flash('Withdrawal successful!', 'success')
         return redirect(url_for('transaction.debit_funds'))
 
-    return render_template('debit.html', user=user)
+    return render_template('debit.html', user=user,admin=user)
 

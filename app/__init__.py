@@ -22,6 +22,9 @@ def create_app():
 
     from app.auth import auth_bp
     app.register_blueprint(auth_bp,url_prefix='/auth')
+    
+    from app.md import admin_bp
+    app.register_blueprint(admin_bp,url_prefix='/admin')
 
     from app.md import transaction_bp
     app.register_blueprint(transaction_bp,url_prefix='/transaction')

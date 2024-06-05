@@ -7,8 +7,7 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-
-    <h3>Your Profile</h3>
+    <h3>User's Profile</h3>
     <table class="transaction-table">
         <thead>
             <tr>
@@ -21,19 +20,19 @@
             </tr>
         </thead>
         <tbody>
-           
+           {%  for user in users %}
             <tr>
                
-                <td>{{ admin.name }}</td>
-                <td>{{ admin.email }}</td>
-                <td>{{ admin.balance }}</td>
-                <td>{{ admin.pin }}</td>
-                <td>{{ admin.account_no }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.balance }}</td>
+                <td>{{ user.pin }}</td>
+                <td>{{ user.account_no }}</td>
                 
             </tr>
-           
+           {% endfor %}
         </tbody>
     </table>
     
 {% endblock %}
-{%  endif %}
+{% endif %}

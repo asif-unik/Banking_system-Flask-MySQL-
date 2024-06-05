@@ -1,12 +1,14 @@
 from flask import Blueprint,jsonify,session,make_response, redirect,url_for, render_template
 from app.auth import auth_bp
+from app.auth import index_bp
 
 
 
 @auth_bp.route('/logout',methods=['GET'])
 def logout():
     if 'id' not in session:
-        return jsonify({'Message':'Please Login first..'})
+        # return jsonify({'Message':'Please Login first..'})
+        return redirect(url_for('index.index'))
     response = make_response(render_template('index.html'))
     response.set_cookie('token', '', expires=0)
     

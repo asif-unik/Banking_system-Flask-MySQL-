@@ -1,4 +1,7 @@
 <!-- transactions.html -->
+{% if admin.is_admin %}
+{% extends "admin.html" %}
+{% else %}
 {% extends "base.html" %}
 
 {% block title %}Transactions{% endblock %}
@@ -32,3 +35,4 @@
         </tbody>
     </table>
 {% endblock %}
+{% endif %}
